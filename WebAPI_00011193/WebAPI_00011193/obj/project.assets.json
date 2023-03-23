@@ -5116,11 +5116,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Sardor\\Desktop\\WebAPI_00011193\\WebAPI_00011193\\WebAPI_00011193.csproj",
+      "projectUniqueName": "C:\\Users\\Sardor\\Desktop\\WAD\\WebAPI_00011193\\WebAPI_00011193\\WebAPI_00011193.csproj",
       "projectName": "WebAPI_00011193",
-      "projectPath": "C:\\Users\\Sardor\\Desktop\\WebAPI_00011193\\WebAPI_00011193\\WebAPI_00011193.csproj",
+      "projectPath": "C:\\Users\\Sardor\\Desktop\\WAD\\WebAPI_00011193\\WebAPI_00011193\\WebAPI_00011193.csproj",
       "packagesPath": "C:\\Users\\Sardor\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Sardor\\Desktop\\WebAPI_00011193\\WebAPI_00011193\\obj\\",
+      "outputPath": "C:\\Users\\Sardor\\Desktop\\WAD\\WebAPI_00011193\\WebAPI_00011193\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Sardor\\AppData\\Roaming\\NuGet\\NuGet.Config",

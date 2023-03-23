@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using WebAPI_00011193.DAL;
 using WebAPI_00011193.Models;
@@ -23,7 +25,9 @@ namespace WebAPI_00011193.Repository
 
         public void UpdateEmployee(Employee employee)
         {
+            employee.EmployeeDepartment = _dbContext.Departments.Find(employee.EmployeeDepartment.ID);
             _dbContext.Entry(employee).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            Save();
         }
 
         public void DeleteEmployee(int id)
@@ -41,7 +45,13 @@ namespace WebAPI_00011193.Repository
 
         public IEnumerable<Employee> GetEmployees()
         {
-            return _dbContext.Employees.ToList();
+            List<Employee> employees = _dbContext.Employees.Include(d => d.EmployeeDepartment).ToList();
+            //foreach(Employee employee in employees)
+            //{
+            //    Console.WriteLine(employee.EmployeeDepartment.ID + employee.EmployeeDepartment.Name);
+            //}
+            //employees.ForEach(x => x.EmployeeDepartment = _dbContext.Departments.Find(x.EmployeeDepartment.ID));
+            return employees;
         }
 
         public void Save()

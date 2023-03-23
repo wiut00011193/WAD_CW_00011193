@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Transactions;
 using WebAPI_00011193.Models;
 using WebAPI_00011193.Repository;
@@ -46,7 +47,7 @@ namespace WebAPI_00011193.Controllers
 
         // PUT api/Employee/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Employee employee)
+        public IActionResult Put([FromBody] Employee employee)
         {
             if (employee != null)
             {

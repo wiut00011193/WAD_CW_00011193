@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dq8D1lmZ2ksw0hzSNH0U5bzx2mFl6uNAEk52vwGX3cTFwC9OZ15frMh/FT4w01RfnEHjjb3NdevAhdh8+t+5cg==",
+  "dgSpecHash": "QXHl3G2GzNpPNfQ39Y8FRdcoQI+OeDdYSXI5se42aqOJSwZIsEAYCi+FTv4pseKgSqjnetCA8G/qDaBYlba2/g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Sardor\\Desktop\\WebApp_00011193\\WebApp_00011193\\WebApp_00011193.csproj",
+  "projectFilePath": "C:\\Users\\Sardor\\Desktop\\WAD\\WebApp_00011193\\WebApp_00011193\\WebApp_00011193.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Sardor\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.9\\microsoft.aspnet.webapi.client.5.2.9.nupkg.sha512",
     "C:\\Users\\Sardor\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",

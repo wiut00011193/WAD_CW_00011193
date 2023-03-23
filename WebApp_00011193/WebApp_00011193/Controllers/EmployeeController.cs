@@ -8,6 +8,8 @@ using WebApp_00011193.Models;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Text;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Linq;
 
 namespace WebApp_00011193.Controllers
 {
@@ -53,6 +55,7 @@ namespace WebApp_00011193.Controllers
 
                 EmployeeInfo = JsonConvert.DeserializeObject<List<Employee>>(responseMessage);
             }
+            //EmployeeInfo.ForEach(emp => emp.EmployeeDepartmentId = emp.EmployeeDepartment.ID);
 
             return View(EmployeeInfo);
         }
@@ -78,12 +81,30 @@ namespace WebApp_00011193.Controllers
                 EmployeeDetails = JsonConvert.DeserializeObject<Employee>(detailsInfo);
             }
 
+            List<Department> DepartmentInfo = new List<Department>();
+
+            HeaderClearing();
+
+            HttpResponseMessage httpResponseMessage = clnt.GetAsync("api/Department").Result;
+
+            // If the request is success
+            if (httpResponseMessage.IsSuccessStatusCode)
+            {
+                // storing the web api data into model that was predefined prior
+                var responseMessage = httpResponseMessage.Content.ReadAsStringAsync().Result;
+
+                DepartmentInfo = JsonConvert.DeserializeObject<List<Department>>(responseMessage);
+            }
+
+            EmployeeDetails.EmployeeDepartment = DepartmentInfo.Find(department => department.ID == EmployeeDetails.EmployeeDepartmentId);
+
             return View(EmployeeDetails);
         }
 
         // GET: Employee/Create
         public ActionResult Create()
         {
+            ViewBag.Departments = GetDepartmentsSelectList();
             return View();
         }
 
@@ -96,7 +117,7 @@ namespace WebApp_00011193.Controllers
             if (ModelState.IsValid)
             {
                 // serializing employee object into json format to send
-                /*string jsonObject = "{"+employee."}"*/ ;
+                /*string jsonObject = "{"+employee."}"*/
                 string createEmployeeInfo = JsonConvert.SerializeObject(employee);
 
                 // creating string content to pass as Http content later
@@ -116,43 +137,154 @@ namespace WebApp_00011193.Controllers
         // GET: Employee/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            // Creating a Get Request to get single Employee
+            Employee EmployeeDetails = new Employee();
+
+            HeaderClearing();
+
+            // Creating a get request after preparation of get URL and assignin the results
+            HttpResponseMessage httpResponseMessageDetails = clnt.GetAsync(clnt.BaseAddress + "api/Employee/" + id).Result;
+
+            // Checking for response state
+            if (httpResponseMessageDetails.IsSuccessStatusCode)
+            {
+                // storing the response details received from web api 
+                string detailsInfo = httpResponseMessageDetails.Content.ReadAsStringAsync().Result;
+
+                // deserializing the response
+                EmployeeDetails = JsonConvert.DeserializeObject<Employee>(detailsInfo);
+            }
+
+            ViewBag.Departments = GetDepartmentsSelectList();
+            return View(EmployeeDetails);
         }
 
         // POST: Employee/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Employee employee)
         {
-            try
+            employee.EmployeeDepartment = new Department { ID = employee.EmployeeDepartmentId };
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                // serializing employee object into json format to send
+                /*string jsonObject = "{"+employee."}"*/
+                string createEmployeeInfo = JsonConvert.SerializeObject(employee);
+
+                // creating string content to pass as Http content later
+                StringContent stringContentInfo = new StringContent(createEmployeeInfo, Encoding.UTF8, "application/json");
+                // Making a Post request
+                HttpResponseMessage createHttpResponseMessage = clnt.PutAsync(clnt.BaseAddress + "api/Employee/" + employee.ID, stringContentInfo).Result;
+                if (createHttpResponseMessage.IsSuccessStatusCode)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(employee);
         }
 
         // GET: Employee/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            // Creating a Get Request to get single Employee
+            Employee EmployeeDetails = new Employee();
+
+            HeaderClearing();
+
+            // Creating a get request after preparation of get URL and assignin the results
+            HttpResponseMessage httpResponseMessageDetails = clnt.GetAsync(clnt.BaseAddress + "api/Employee/" + id).Result;
+
+            // Checking for response state
+            if (httpResponseMessageDetails.IsSuccessStatusCode)
+            {
+                // storing the response details received from web api 
+                string detailsInfo = httpResponseMessageDetails.Content.ReadAsStringAsync().Result;
+
+                // deserializing the response
+                EmployeeDetails = JsonConvert.DeserializeObject<Employee>(detailsInfo);
+            }
+
+            List<Department> DepartmentInfo = new List<Department>();
+
+            HeaderClearing();
+
+            HttpResponseMessage httpResponseMessage = clnt.GetAsync("api/Department").Result;
+
+            // If the request is success
+            if (httpResponseMessage.IsSuccessStatusCode)
+            {
+                // storing the web api data into model that was predefined prior
+                var responseMessage = httpResponseMessage.Content.ReadAsStringAsync().Result;
+
+                DepartmentInfo = JsonConvert.DeserializeObject<List<Department>>(responseMessage);
+            }
+
+
+            EmployeeDetails.EmployeeDepartment = DepartmentInfo.Find(department => department.ID == EmployeeDetails.EmployeeDepartmentId);
+
+            return View(EmployeeDetails);
         }
 
         // POST: Employee/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(Employee employee)
         {
-            try
+            employee.EmployeeDepartment = new Department { ID = employee.EmployeeDepartmentId };
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                // serializing employee object into json format to send
+                /*string jsonObject = "{"+employee."}"*/
+                string createEmployeeInfo = JsonConvert.SerializeObject(employee);
+
+                // creating string content to pass as Http content later
+                StringContent stringContentInfo = new StringContent(createEmployeeInfo, Encoding.UTF8, "application/json");
+                // Making a Post request
+                HttpResponseMessage createHttpResponseMessage = clnt.DeleteAsync(clnt.BaseAddress + "api/Employee/" + employee.ID).Result;
+                if (createHttpResponseMessage.IsSuccessStatusCode)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
             }
-            catch
+
+            return View(employee);
+        }
+
+        private List<SelectListItem> GetDepartmentsSelectList()
+        {
+            List<Department> DepartmentInfo = new List<Department>();
+
+            HeaderClearing();
+
+            HttpResponseMessage httpResponseMessage = clnt.GetAsync("api/Department").Result;
+
+            // If the request is success
+            if (httpResponseMessage.IsSuccessStatusCode)
             {
-                return View();
+                // storing the web api data into model that was predefined prior
+                var responseMessage = httpResponseMessage.Content.ReadAsStringAsync().Result;
+
+                DepartmentInfo = JsonConvert.DeserializeObject<List<Department>>(responseMessage);
             }
+
+            var listDepartment = new List<SelectListItem>();
+
+            listDepartment = DepartmentInfo.Select(d => new SelectListItem()
+            {
+                Value = d.ID.ToString(),
+                Text = d.Name
+            }).ToList();
+
+            var defItem = new SelectListItem()
+            {
+                Value = "",
+                Text = "--Select Department--"
+            };
+
+            listDepartment.Insert(0, defItem);
+
+            return listDepartment;
         }
     }
 }

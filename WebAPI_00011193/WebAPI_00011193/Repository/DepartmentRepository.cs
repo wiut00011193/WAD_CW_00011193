@@ -23,6 +23,7 @@ namespace WebAPI_00011193.Repository
         public void UpdateDepartment(Department department)
         {
             _dbContext.Entry(department).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            Save();
         }
 
         public void DeleteDepartment(int id)
