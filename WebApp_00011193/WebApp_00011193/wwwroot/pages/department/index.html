@@ -1,0 +1,28 @@
+﻿<h2>Departments</h2>
+
+<div class="form-group">
+    <a href="#!/create">Create New</a>
+</div>
+
+<div class="row">
+    <div class="col-md-10">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="d in departments">
+                    <td>{{d.id}}</td>
+                    <td>{{d.title}}</td>
+                    <td><a href="#!/details/{{d.id}}">View</a> | <a href="#!/edit/{{d.id}}">Edit</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+

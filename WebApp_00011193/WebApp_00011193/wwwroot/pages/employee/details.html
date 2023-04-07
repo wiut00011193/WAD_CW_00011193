@@ -1,0 +1,60 @@
+﻿<div class="container">
+    <br>
+    <h3>Employee Details</h3>
+    <hr />
+    <div class="row">
+        <div class="col-sm-2">
+            <strong>ID</strong>
+        </div>
+        <div class="col-sm-10">
+            {{ details.id }}
+        </div>
+        <div class="col-sm-2">
+            <strong>First Name</strong>
+        </div>
+        <div class="col-sm-10">
+            {{ details.firstName }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <strong>Last Name</strong>
+        </div>
+        <div class="col-sm-10">
+            {{ details.lastName }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <strong>Gender</strong>
+        </div>
+        <div class="col-sm-10">
+            {{ details.gender | genderFilter }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <strong>Salary</strong>
+        </div>
+        <div class="col-sm-10">
+            {{ details.salary }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <strong>Department</strong>
+        </div>
+        <div class="col-sm-10">
+            {{ details.employeeDepartment.title }}
+        </div>
+    </div>
+
+    <br />
+
+    <div class="row">
+        <div class="col-sm-12">
+            <a href="#!/edit/{{details.id}}">Edit</a> |
+            <a href="#!">Back to List</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+﻿<h3>Create Employee</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form>
+            <div class="form-group">
+                <label for="firstName" class="control-label">First Name</label>
+                <input ng-model="create.firstName" class="form-control" id="firstName" name="firstName" placeholder="First Name" required />
+            </div>
+            <div class="form-group">
+                <label for="lastName" class="control-label">Last Name</label>
+                <input ng-model="create.lastName" class="form-control" id="lastName" name="lastName" placeholder="Last Name" required />
+            </div>
+            <div class="form-group">
+                <label for="gender" class="control-label">Gender</label>
+                <select ng-model="create.gender" class="form-control" id="gender" name="gender" required>
+                    <option value="">--Select Gender--</option>
+                    <option ng-repeat="gender in genders" value="{{gender.value}}">{{gender.text}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="salary" class="control-label">Salary</label>
+                <input ng-model="create.salary" class="form-control" type="number" required />
+            </div>
+            <div class="form-group">
+                <label for="department" class="control-label">Department</label>
+                <select ng-model="create.employeeDepartmentId" class="form-control" required>
+                    <option value="">--Select Department--</option>
+                    <option ng-repeat="dep in departments" value="{{dep.id}}">{{dep.title}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" ng-click="Save()">Create</button>
+                <a class="btn btn-default" href="/">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

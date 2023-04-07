@@ -1438,6 +1438,19 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "DataBaseAccess/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.SqlServer": "3.1.0"
+        },
+        "compile": {
+          "bin/placeholder/DataBaseAccess.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DataBaseAccess.dll": {}
+        }
       }
     }
   },
@@ -5103,10 +5116,16 @@
         "system.xml.xmlserializer.4.3.0.nupkg.sha512",
         "system.xml.xmlserializer.nuspec"
       ]
+    },
+    "DataBaseAccess/1.0.0": {
+      "type": "project",
+      "path": "../DataBaseAccess/DataBaseAccess.csproj",
+      "msbuildProject": "../DataBaseAccess/DataBaseAccess.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "DataBaseAccess >= 1.0.0",
       "Microsoft.EntityFrameworkCore.SqlServer >= 3.1.0"
     ]
   },
@@ -5116,11 +5135,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Sardor\\Desktop\\WAD\\WebAPI_00011193\\WebAPI_00011193\\WebAPI_00011193.csproj",
+      "projectUniqueName": "C:\\Users\\Sardor\\Desktop\\WAD\\WAD\\WebAPI_00011193\\WebAPI_00011193\\WebAPI_00011193.csproj",
       "projectName": "WebAPI_00011193",
-      "projectPath": "C:\\Users\\Sardor\\Desktop\\WAD\\WebAPI_00011193\\WebAPI_00011193\\WebAPI_00011193.csproj",
+      "projectPath": "C:\\Users\\Sardor\\Desktop\\WAD\\WAD\\WebAPI_00011193\\WebAPI_00011193\\WebAPI_00011193.csproj",
       "packagesPath": "C:\\Users\\Sardor\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Sardor\\Desktop\\WAD\\WebAPI_00011193\\WebAPI_00011193\\obj\\",
+      "outputPath": "C:\\Users\\Sardor\\Desktop\\WAD\\WAD\\WebAPI_00011193\\WebAPI_00011193\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Sardor\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5136,7 +5155,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Sardor\\Desktop\\WAD\\WAD\\WebAPI_00011193\\DataBaseAccess\\DataBaseAccess.csproj": {
+              "projectPath": "C:\\Users\\Sardor\\Desktop\\WAD\\WAD\\WebAPI_00011193\\DataBaseAccess\\DataBaseAccess.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -5173,7 +5196,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

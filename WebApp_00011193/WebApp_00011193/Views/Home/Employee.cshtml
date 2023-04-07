@@ -1,0 +1,141 @@
+﻿<div ng-app="webApp">
+    <div ng-view></div>
+</div>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+<script type="text/javascript">
+
+    var baseURL = 'http://localhost:41522/api/'
+    angular
+        .module('webApp', ['ngRoute'])
+        .config(function ($routeProvider) {
+            $routeProvider
+                .when('/',
+                    {
+                        templateUrl: 'pages/employee/index.html',
+                        controller: 'IndexController'
+                    })
+                .when('/create',
+                    {
+                        templateUrl: 'pages/employee/create.html',
+                        controller: 'CreateController'
+                    })
+                .when('/details/:employeeId',
+                    {
+                        templateUrl: 'pages/employee/details.html',
+                        controller: 'DetailsController'
+                    })
+
+                .when('/edit/:employeeId',
+                    {
+                        templateUrl: 'pages/employee/edit.html',
+                        controller: 'EditDeleteController'
+                    })
+                .otherwise({
+                    redirectTo: '/'
+                });
+
+        })
+
+
+        .controller('IndexController', ['$scope', '$http', '$filter', function ($scope, $http, $filter) {
+            $scope.employees = [];
+            $http.get(baseURL + 'Employee/')
+                .then(function (res) {
+                    $scope.employees = res.data;
+                });
+
+        }])
+
+
+        .controller('CreateController', ['$scope', '$http', '$location', '$filter', function ($scope, $http, $location, $filter) {
+            $scope.create =
+            {
+                firstName: '',
+                lastName: '',
+                gender: '',
+                salary: 0,
+                employeeDepartmentId: ''
+            };
+            $scope.genders = [{"value": 0, "text": 'Male' }, { "value": 1, "text": 'Female' }];
+
+            $http.get(baseURL + 'Department/')
+                .then(function (res) {
+                    $scope.departments = res.data;
+                });
+            
+
+            $scope.Save = function () {
+                $scope.create.gender = parseInt($scope.create.gender);
+                $scope.create.employeeDepartmentId = parseInt($scope.create.employeeDepartmentId);
+                $scope.create.employeeDepartment = { id: $scope.create.employeeDepartmentId }
+
+                $http.post(baseURL + 'Employee/', $scope.create)
+                    .then(function (res) {
+                        $location.path('/');
+                    });
+            }
+        }])
+
+
+        .controller('DetailsController', ['$scope', '$http', '$routeParams', '$filter', function ($scope, $http, $routeParams, $filter) {
+            $scope.details = [];
+
+            $http.get(baseURL + 'Employee/' + $routeParams.employeeId)
+                .then(function (res) {
+                    $scope.details = res.data;
+                    $http.get(baseURL + 'Department/' + $scope.details.employeeDepartmentId)
+                        .then(function (res) {
+                            $scope.details.employeeDepartment = res.data;
+                        });
+                });
+        }])
+
+
+        .controller('EditDeleteController', ['$scope', '$http', '$location', '$routeParams', '$filter', function ($scope, $http, $location, $routeParams) {
+
+            $scope.genders = [{ "value": 0, "text": 'Male' }, { "value": 1, "text": 'Female' }];
+            $scope.edit = [];
+
+            $http.get(baseURL + 'Employee/' + $routeParams.employeeId)
+                .then(function (res) {
+                    $scope.edit = res.data;
+                    $scope.edit.gender += "";
+                    $scope.edit.employeeDepartmentId += "";
+                    $http.get(baseURL + 'Department/')
+                        .then(function (res) {
+                            $scope.departments = res.data;
+                        });
+                });
+
+            $scope.Edit = function () {
+                $scope.edit.gender = parseInt($scope.edit.gender);
+                $scope.edit.employeeDepartmentId = parseInt($scope.edit.employeeDepartmentId);
+
+                $http.put(baseURL + 'Employee/' + $routeParams.employeeId, $scope.edit)
+                    .then(function (res) {
+                        $location.path('/');
+                    });
+            };
+
+            $scope.Delete = function () {
+                $http.delete(baseURL + 'Employee/' + $routeParams.employeeId, null)
+                    .then(function (res) {
+                        $location.path('/');
+                    });
+            };
+        }])
+
+        .filter('genderFilter', function() {
+            return function (input) {
+                switch (input) {
+                    case 0:
+                        return 'Male';
+                        break;
+                    case 1:
+                        return 'Female';
+                        break;
+                }
+            }
+        })
+</script>

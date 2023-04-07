@@ -1,0 +1,28 @@
+﻿<div class="container">
+    <br>
+    <h3>Department Details</h3>
+    <hr />
+    <div class="row">
+        <div class="col-sm-2">
+            <strong>ID</strong>
+        </div>
+        <div class="col-sm-10">
+            {{ details.id }}
+        </div>
+        <div class="col-sm-2">
+            <strong>Title</strong>
+        </div>
+        <div class="col-sm-10">
+            {{ details.title }}
+        </div>
+    </div>
+
+    <br />
+
+    <div class="row">
+        <div class="col-sm-12">
+            <a href="#!/edit/{{details.id}}">Edit</a> |
+            <a href="#!">Back to List</a>
+        </div>
+    </div>
+</div>

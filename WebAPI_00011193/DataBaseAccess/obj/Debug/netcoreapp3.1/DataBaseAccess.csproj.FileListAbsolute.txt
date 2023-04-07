@@ -1,0 +1,10 @@
+C:\Users\Sardor\Desktop\WAD\WAD\WebAPI_00011193\DataBaseAccess\bin\Debug\netcoreapp3.1\DataBaseAccess.deps.json
+C:\Users\Sardor\Desktop\WAD\WAD\WebAPI_00011193\DataBaseAccess\bin\Debug\netcoreapp3.1\DataBaseAccess.dll
+C:\Users\Sardor\Desktop\WAD\WAD\WebAPI_00011193\DataBaseAccess\bin\Debug\netcoreapp3.1\DataBaseAccess.pdb
+C:\Users\Sardor\Desktop\WAD\WAD\WebAPI_00011193\DataBaseAccess\obj\Debug\netcoreapp3.1\DataBaseAccess.csproj.AssemblyReference.cache
+C:\Users\Sardor\Desktop\WAD\WAD\WebAPI_00011193\DataBaseAccess\obj\Debug\netcoreapp3.1\DataBaseAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Sardor\Desktop\WAD\WAD\WebAPI_00011193\DataBaseAccess\obj\Debug\netcoreapp3.1\DataBaseAccess.AssemblyInfoInputs.cache
+C:\Users\Sardor\Desktop\WAD\WAD\WebAPI_00011193\DataBaseAccess\obj\Debug\netcoreapp3.1\DataBaseAccess.AssemblyInfo.cs
+C:\Users\Sardor\Desktop\WAD\WAD\WebAPI_00011193\DataBaseAccess\obj\Debug\netcoreapp3.1\DataBaseAccess.csproj.CoreCompileInputs.cache
+C:\Users\Sardor\Desktop\WAD\WAD\WebAPI_00011193\DataBaseAccess\obj\Debug\netcoreapp3.1\DataBaseAccess.dll
+C:\Users\Sardor\Desktop\WAD\WAD\WebAPI_00011193\DataBaseAccess\obj\Debug\netcoreapp3.1\DataBaseAccess.pdb
